@@ -6,6 +6,7 @@ import { Observable } from 'rxjs'
 import { isSubmittingSelector } from '../../store/selectors'
 import { AuthService } from '../../services/auth.service'
 import { CurrentUserInterface } from '../../../shared/types/current-user.interface'
+import { RegisterRequestInterface } from '../../types/register-request.interface'
 
 @Component({
   selector: 'mc-register',
@@ -24,11 +25,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.initializeForm()
-    this.initializeValues()
+    this._initializeForm()
+    this._initializeValues()
   }
 
-  private initializeForm() {
+  private _initializeForm() {
     this.form = this._fb.group({
       username: ['', Validators.required],
       email: '',
@@ -37,12 +38,13 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this._store.dispatch(registerAction(this.form.value))
-    this._authService.register(this.form.value)
-      .subscribe((currentUser: CurrentUserInterface) => console.log(currentUser))
+    const request: RegisterRequestInterface = {
+      user: this.form.value
+    }
+    this._store.dispatch(registerAction({ request }))
   }
 
-  private initializeValues() {
+  private _initializeValues() {
     this.isSubmitting$ = this._store.pipe(select(isSubmittingSelector))
   }
 }
