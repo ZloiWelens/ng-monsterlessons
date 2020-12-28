@@ -1,0 +1,52 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Регистрация</h1>
+        <p class="text-xs-center">
+          <a [routerLink]="['/login']">Уже зарегистрированы?</a>
+        </p>
+
+        <mc-backend-error-messages
+          *ngIf="backendErrors$ | async"
+          [backendErrors]="backendErrors$ | async"
+        ></mc-backend-error-messages>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="Логин"
+                formControlName="username"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="text"
+                class="form-control form-control-lg"
+                placeholder="Почта"
+                formControlName="email"
+              />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                type="password"
+                class="form-control form-control-lg"
+                placeholder="Пароль"
+                formControlName="password"
+              />
+            </fieldset>
+            <button
+              [disabled]="isSubmitting$ | async"
+              class="btn btn-lg btn-primary pull-xs-right"
+              type="submit">
+              Зарегистрироваться
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
