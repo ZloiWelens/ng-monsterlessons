@@ -5,7 +5,6 @@ import { registerAction } from '../../store/actions/register.action'
 import { Observable } from 'rxjs'
 import { isSubmittingSelector } from '../../store/selectors'
 import { AuthService } from '../../services/auth.service'
-import { CurrentUserInterface } from '../../../shared/types/current-user.interface'
 import { RegisterRequestInterface } from '../../types/register-request.interface'
 
 @Component({
